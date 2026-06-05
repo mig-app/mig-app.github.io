@@ -1,4 +1,4 @@
-/* mig site — brand language: notebook dark ground, near-white text,
+/* mig site brand language: notebook dark ground, near-white text,
    oxblood accents, lowercase, hairline rules. */
 
 :root {
@@ -201,3 +201,64 @@ footer a:hover {
     font-size: 16px;
   }
 }
+
+/* roadmap (home): vertical timeline, uses existing brand tokens */
+.roadmap {
+  position: relative;
+  margin-top: 8px;
+  padding-left: 24px;
+}
+.roadmap::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 6px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--hairline);
+}
+.roadmap .stage {
+  position: relative;
+  padding-bottom: 26px;
+}
+.roadmap .stage:last-child { padding-bottom: 0; }
+.roadmap .stage::before {
+  content: "";
+  position: absolute;
+  left: -24px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--oxblood);
+  box-shadow: 0 0 0 4px var(--ground);
+}
+.roadmap .stage.exploring::before {
+  background: var(--ground);
+  border: 1.5px solid var(--muted);
+}
+.roadmap h3 { margin-top: 0; margin-bottom: 6px; }
+.roadmap h3 .when {
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--muted);
+  margin-left: 8px;
+}
+.roadmap ul { margin: 0; list-style: none; }
+.roadmap li {
+  position: relative;
+  padding-left: 15px;
+  margin-bottom: 4px;
+  color: var(--muted);
+}
+.roadmap li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--oxblood);
+}
+.roadmap .stage.exploring li::before { background: var(--muted); }
