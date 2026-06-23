@@ -1,0 +1,49 @@
+/* MiG design tokens. The single source of truth for the palette, lifted
+   verbatim from the iOS app's Theme.swift (the code that actually renders).
+   The website and the React components both consume these variables, so the
+   brand stays one color in one place. Do not add a second accent.
+
+   feeling: a notebook in the dark. lowercase chrome, hairline rules,
+   one oxblood accent that means "confirm" and "advance". */
+
+:root {
+  /* surfaces, dark to light */
+  --mig-ground: #14130f;   /* the page */
+  --mig-card: #1f1d18;     /* raised panels */
+  --mig-panel: #262320;    /* tiles, keys, slots */
+  --mig-hairline: #36312a; /* dividers, borders */
+  --mig-bar-floor: #0a0907; /* bottom bar floor */
+
+  /* the single accent */
+  --mig-oxblood: #bf382b;        /* the one meaningful color */
+  --mig-oxblood-bright: #e04434; /* brighter, for expressive moments */
+  --mig-oxblood-wash: #2a1715;   /* tint behind a solved cell */
+
+  /* text, bright to dim */
+  --mig-near-white: #f5f3ec; /* primary text */
+  --mig-gloss: #a8a69d;      /* bright secondary text */
+  --mig-dim: #8a8880;        /* dim secondary text */
+  --mig-muted: #6e6b64;      /* muted, empty states */
+
+  /* type. system face, no bundled custom font (matches the app). */
+  --mig-font: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --mig-font-mono: "SF Mono", ui-monospace, "DejaVu Sans Mono", monospace;
+
+  /* shape */
+  --mig-radius-tile: 16px;
+  --mig-radius-cell: 12px;
+  --mig-radius-pill: 999px;
+  --mig-hairline-width: 1px;
+
+  /* motion */
+  --mig-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --mig-spring-fast: 220ms;
+  --mig-spring: 320ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --mig-spring-fast: 0ms;
+    --mig-spring: 0ms;
+  }
+}
