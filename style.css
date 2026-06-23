@@ -1,13 +1,20 @@
 /* mig site brand language: notebook dark ground, near-white text,
-   oxblood accents, lowercase, hairline rules. */
+   oxblood accents, lowercase, hairline rules.
+
+   the palette now comes from the shared MiG design system (tokens.css,
+   vendored from @mig/design). the site's own variable names are kept so the
+   rest of this file is untouched. each one just points at a canonical
+   --mig-* token, so the site and the app stay one color in one place.
+   re-copy tokens.css from the design system when the palette changes. */
+@import "tokens.css";
 
 :root {
-  --ground: #14130F;
-  --card: #1F1D18;
-  --text: #F5F3EC;
-  --muted: #8A8680;
-  --oxblood: #C0392B;
-  --hairline: rgba(245, 243, 236, 0.08);
+  --ground: var(--mig-ground);
+  --card: var(--mig-card);
+  --text: var(--mig-near-white);
+  --muted: var(--mig-dim);
+  --oxblood: var(--mig-oxblood);
+  --hairline: var(--mig-hairline);
 }
 
 * {
