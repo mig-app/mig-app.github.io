@@ -269,3 +269,22 @@ footer a:hover {
   background: var(--oxblood);
 }
 .roadmap .stage.exploring li::before { background: var(--muted); }
+
+/* call-to-action button: app store, mavis. oxblood outline, fills on hover. */
+.cta {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 8px 15px;
+  border: 1px solid var(--oxblood);
+  border-radius: 8px;
+  color: var(--oxblood);
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--oxblood);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.cta:hover {
+  background: var(--oxblood);
+  color: var(--text);
+  border-bottom-color: var(--oxblood);
+}
