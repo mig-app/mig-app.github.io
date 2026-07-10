@@ -269,3 +269,35 @@ footer a:hover {
   background: var(--oxblood);
 }
 .roadmap .stage.exploring li::before { background: var(--muted); }
+
+/* home hub: app-store cta + web-tool cards */
+.cta {
+  display: inline-block;
+  padding: 9px 16px;
+  border: 1px solid var(--oxblood);
+  border-radius: 8px;
+  color: var(--oxblood);
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--oxblood);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.cta:hover {
+  background: var(--oxblood);
+  color: var(--mig-near-white);
+  border-bottom-color: var(--oxblood);
+}
+.tool {
+  display: block;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--hairline);
+  transition: border-color 0.15s ease;
+}
+.tool:hover { border-color: var(--oxblood); border-bottom-color: var(--oxblood); }
+.tool-name { font-size: 18px; font-weight: 600; color: var(--text); }
+.tool-name .lat { font-size: 13px; color: var(--muted); font-weight: 400; margin-left: 8px; }
+.tool-desc { font-size: 14px; color: var(--muted); margin-top: 4px; }
