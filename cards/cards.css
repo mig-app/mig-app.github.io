@@ -50,6 +50,27 @@
 .deck-edit:hover { border-color: var(--oxblood); color: var(--text); }
 .empty { color: var(--muted); font-size: 14px; padding: 6px 0; }
 
+/* ready-made mig sets */
+.setshead {
+  margin: 40px 0 2px;
+  font-size: 13px; color: var(--muted); letter-spacing: 0.06em;
+}
+.setslevel {
+  margin: 20px 0 8px;
+  font-size: 11px; color: var(--muted); letter-spacing: 0.16em; text-transform: uppercase;
+}
+.setgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.setrow {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  background: var(--card); border: 1px solid var(--hairline); border-radius: 10px;
+  padding: 12px 14px; cursor: pointer; font-family: inherit; text-align: left;
+  transition: border-color 0.15s ease;
+}
+.setrow:hover { border-color: var(--oxblood); }
+.setname { font-size: 14px; color: var(--text); }
+.setcount { font-size: 12px; color: var(--muted); flex: none; font-variant-numeric: tabular-nums; }
+@media (max-width: 480px) { .setgrid { grid-template-columns: 1fr; } }
+
 /* editor */
 .field { display: block; margin-bottom: 18px; }
 .flabel { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
