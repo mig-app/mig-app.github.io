@@ -1,45 +1,10 @@
-/* «повторяй» — hear a russian phrase, repeat it aloud, get scored.
+/* «повторяй» — hear a russian word or phrase, repeat it aloud, get scored.
    Web Speech only: speechSynthesis to say it, SpeechRecognition to grade it.
-   Scoring ported from the mavis engine (per-word fuzzy + char ratio). */
+   Scoring lives in score.js (standalone so it can be tested + ported to iOS). */
 (function () {
   'use strict';
   var PHRASES = (window.PHRASES || []).filter(function (p) { return p && p.ru && p.kind; });
-
-  // ---- scoring ---------------------------------------------------------------
-  function normalize(s) {
-    return s.toLowerCase().replace(/ё/g, 'е').replace(/[^\p{L}\s]/gu, ' ').replace(/\s+/g, ' ').trim();
-  }
-  function lev(a, b) {
-    var m = a.length, n = b.length;
-    if (!m) return n;
-    if (!n) return m;
-    var prev = [], cur = [], i, j;
-    for (j = 0; j <= n; j++) prev[j] = j;
-    for (i = 1; i <= m; i++) {
-      cur[0] = i;
-      for (j = 1; j <= n; j++) {
-        var cost = a[i - 1] === b[j - 1] ? 0 : 1;
-        cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
-      }
-      for (j = 0; j <= n; j++) prev[j] = cur[j];
-    }
-    return prev[n];
-  }
-  function wordClose(a, b) {
-    if (a === b) return true;
-    if (Math.abs(a.length - b.length) > 2) return false;
-    return lev(a, b) <= (b.length <= 4 ? 1 : 2);
-  }
-  function match(target, said) {
-    var t = normalize(target), s = normalize(said);
-    var tw = t.split(' ').filter(Boolean), sw = s.split(' ').filter(Boolean);
-    var words = tw.map(function (w) { return { target: w, ok: sw.some(function (x) { return wordClose(x, w); }) }; });
-    var wordScore = tw.length ? words.filter(function (w) { return w.ok; }).length / tw.length : 0;
-    var charScore = 1 - lev(t, s) / Math.max(t.length, s.length, 1);
-    var score = Math.round((0.7 * wordScore + 0.3 * Math.max(0, charScore)) * 100);
-    var verdict = score >= 80 ? 'great' : score >= 55 ? 'close' : 'off';
-    return { score: score, verdict: verdict, words: words };
-  }
+  var match = window.RepeatScore.match;
 
   // ---- text to speech --------------------------------------------------------
   function pickVoice(lang) {
@@ -68,7 +33,7 @@
   var srSupported = !!SR;
 
   // ---- state -----------------------------------------------------------------
-  var mode = 'sentence', current = null, listening = false, reco = null;
+  var mode = 'word', current = null, listening = false, reco = null;
   var score = 0, streak = 0, done = 0;
 
   var $ = function (id) { return document.getElementById(id); };
