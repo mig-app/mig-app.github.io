@@ -301,3 +301,18 @@ footer a:hover {
 .tool-name { font-size: 18px; font-weight: 600; color: var(--text); }
 .tool-name .lat { font-size: 13px; color: var(--muted); font-weight: 400; margin-left: 8px; }
 .tool-desc { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+/* ready-made vocabulary sets, shared by карточки and повторяй */
+.setshead { margin: 34px 0 2px; font-size: 13px; color: var(--muted); letter-spacing: 0.06em; }
+.setslevel { margin: 20px 0 8px; font-size: 11px; color: var(--muted); letter-spacing: 0.16em; text-transform: uppercase; }
+.setgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.setrow {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  background: var(--card); border: 1px solid var(--hairline); border-radius: 10px;
+  padding: 12px 14px; cursor: pointer; font-family: inherit; text-align: left;
+  transition: border-color 0.15s ease;
+}
+.setrow:hover { border-color: var(--oxblood); }
+.setname { font-size: 14px; color: var(--text); }
+.setcount { font-size: 12px; color: var(--muted); flex: none; font-variant-numeric: tabular-nums; }
+@media (max-width: 480px) { .setgrid { grid-template-columns: 1fr; } }

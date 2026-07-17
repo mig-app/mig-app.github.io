@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>повторяй · mig</title>
-<meta name="description" content="hear a russian phrase, repeat it aloud, get scored. a small pronunciation trainer from mig, right in the browser.">
+<meta name="description" content="hear a russian word, repeat it aloud, get scored. a small pronunciation trainer from mig, right in the browser.">
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="repeat.css">
 </head>
@@ -20,44 +20,59 @@
 
   <h1>повторяй</h1>
   <div class="rule"></div>
-  <p class="rlede">послушай и повтори вслух. я оценю произношение.</p>
+  <p class="rlede" id="lede">послушай и повтори вслух. я оценю произношение.</p>
 
-  <div class="modebar" role="tablist">
-    <button class="mode on" data-mode="word">слова</button>
-    <button class="mode" data-mode="sentence">фразы</button>
-  </div>
+  <!-- picker: warm-up sets + the ready-made mig vocabulary -->
+  <section id="v-pick">
+    <div id="pickList"></div>
+  </section>
 
-  <div class="rcard">
-    <div class="ru" id="ru"></div>
-    <div class="en" id="en"></div>
-    <div class="translit" id="translit"></div>
-    <button class="listen" id="listen" type="button">
-      <svg viewBox="0 0 16 16" fill="none" aria-hidden><path d="M2 6v4M5 3.5v9M8 5v6M11 4v8M14 6.5v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      прослушать
-    </button>
-  </div>
+  <!-- practice: one word at a time, walk with назад / дальше -->
+  <section id="v-practice" hidden>
+    <div class="practicetop">
+      <button class="crumb" id="back" type="button">к наборам</button>
+      <div class="pos" id="pos"></div>
+    </div>
 
-  <div class="mic-wrap">
-    <button class="mic" id="mic" type="button" aria-label="говорить">
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden>
-        <rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/>
-        <path d="M6 11a6 6 0 0 0 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <path d="M12 17v3M9 20h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <div class="status" id="status">нажми и повтори</div>
-  </div>
+    <div class="rcard">
+      <div class="ru" id="ru"></div>
+      <div class="en" id="en"></div>
+      <div class="translit" id="translit"></div>
+      <button class="listen" id="listen" type="button">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden><path d="M2 6v4M5 3.5v9M8 5v6M11 4v8M14 6.5v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        прослушать
+      </button>
+    </div>
 
-  <div class="result" id="result" hidden></div>
+    <div class="mic-wrap">
+      <button class="mic" id="mic" type="button" aria-label="говорить">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+          <rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/>
+          <path d="M6 11a6 6 0 0 0 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M12 17v3M9 20h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div class="status" id="status">нажми и повтори</div>
+    </div>
 
-  <div class="actions">
-    <button id="next" type="button">дальше</button>
-  </div>
+    <div class="result" id="result" hidden></div>
 
-  <p id="srnote" hidden>
-    оценка произношения работает лучше всего в chrome (нужен доступ к микрофону).
-    в других браузерах можно слушать и повторять, но без оценки.
-  </p>
+    <div class="navrow">
+      <button class="nav" id="prev" type="button" aria-label="предыдущее слово">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden><path d="M10 3 L5 8 L10 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        назад
+      </button>
+      <button class="nav" id="next" type="button" aria-label="следующее слово">
+        дальше
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden><path d="M6 3 L11 8 L6 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <p id="srnote" hidden>
+      оценка произношения работает лучше всего в chrome (нужен доступ к микрофону).
+      в других браузерах можно слушать и повторять, но без оценки.
+    </p>
+  </section>
 
   <footer>
     <a href="../">mig</a> ·
@@ -67,6 +82,7 @@
   </footer>
 </main>
 <script src="phrases.js"></script>
+<script src="../mig-sets.js"></script>
 <script src="score.js"></script>
 <script src="repeat.js"></script>
 </body>
