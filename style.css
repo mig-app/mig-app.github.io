@@ -15,6 +15,24 @@
   --muted: var(--mig-dim);
   --oxblood: var(--mig-oxblood);
   --hairline: var(--mig-hairline);
+  --on-accent: #f5f3ec; /* text on the oxblood fill; stays light in both themes */
+}
+
+/* Light mode: clean white ground, neutral ink, the same single oxblood accent.
+   Follows the device by default (a tiny inline script in each page sets
+   data-theme before first paint); the corner toggle overrides and remembers. */
+:root[data-theme="light"] {
+  --mig-ground: #ffffff;
+  --mig-card: #f6f6f3;
+  --mig-panel: #edecea;
+  --mig-hairline: #e5e4df;
+  --mig-bar-floor: #f2f1ee;
+  --mig-oxblood-bright: #a82e23;
+  --mig-oxblood-wash: #fbe4df;
+  --mig-near-white: #1a1a19;
+  --mig-gloss: #45443e;
+  --mig-dim: #6d6c66;
+  --mig-muted: #8a8983;
 }
 
 * {
@@ -284,20 +302,68 @@ footer a:hover {
 }
 .cta:hover {
   background: var(--oxblood);
-  color: var(--mig-near-white);
+  color: var(--on-accent);
   border-bottom-color: var(--oxblood);
 }
 .tool {
   display: block;
+  position: relative;
   background: var(--card);
   border: 1px solid var(--hairline);
   border-radius: 12px;
-  padding: 18px 20px;
+  padding: 18px 44px 18px 20px;
   margin-bottom: 12px;
   border-bottom: 1px solid var(--hairline);
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, transform 0.15s ease;
 }
 .tool:hover { border-color: var(--oxblood); border-bottom-color: var(--oxblood); }
+/* a quiet chevron that nudges on hover, so the card reads as a link */
+.tool::after {
+  content: ""; position: absolute; top: 24px; right: 20px;
+  width: 7px; height: 7px;
+  border-right: 1.5px solid var(--muted); border-top: 1.5px solid var(--muted);
+  transform: rotate(45deg);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.tool:hover::after { border-color: var(--oxblood); transform: rotate(45deg) translate(2px, -2px); }
 .tool-name { font-size: 18px; font-weight: 600; color: var(--text); }
 .tool-name .lat { font-size: 13px; color: var(--muted); font-weight: 400; margin-left: 8px; }
 .tool-desc { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+/* "on the web": set the web tools apart from the app pitch with a top rule */
+.onweb {
+  border-top: 1px solid var(--hairline);
+  margin-top: 48px;
+  padding-top: 32px;
+}
+.onweb h2 { margin-top: 0; }
+
+/* theme toggle: a small corner button, present on every page (injected by theme.js).
+   uses the lighter panel fill plus a soft shadow so it floats and is easy to find. */
+.themetoggle {
+  position: fixed; bottom: 22px; right: 22px; z-index: 50;
+  width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--mig-panel); border: 1px solid var(--hairline);
+  color: var(--text); cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.themetoggle:hover { color: var(--oxblood); border-color: var(--oxblood); transform: translateY(-1px); }
+.themetoggle svg { width: 19px; height: 19px; }
+@media (max-width: 480px) { .themetoggle { bottom: 16px; right: 16px; } }
+
+/* ready-made vocabulary sets, shared by карточки and повторяй */
+.setshead { margin: 34px 0 2px; font-size: 13px; color: var(--muted); letter-spacing: 0.06em; }
+.setslevel { margin: 20px 0 8px; font-size: 11px; color: var(--muted); letter-spacing: 0.16em; text-transform: uppercase; }
+.setgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.setrow {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  background: var(--card); border: 1px solid var(--hairline); border-radius: 10px;
+  padding: 12px 14px; cursor: pointer; font-family: inherit; text-align: left;
+  transition: border-color 0.15s ease;
+}
+.setrow:hover { border-color: var(--oxblood); }
+.setname { font-size: 14px; color: var(--text); }
+.setcount { font-size: 12px; color: var(--muted); flex: none; font-variant-numeric: tabular-nums; }
+@media (max-width: 480px) { .setgrid { grid-template-columns: 1fr; } }

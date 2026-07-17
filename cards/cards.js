@@ -185,13 +185,49 @@
     renderDecks();
   }
 
-  function starterDeck() {
-    var src = (window.PHRASES || []).filter(function (p) { return p.kind === 'word'; });
-    if (!src.length) return;
-    var cards = src.map(function (p) { return { ru: p.ru, en: p.en }; });
-    decks.push({ id: newId(), name: 'слова из «повторяй»', cards: cards });
-    saveDecks(decks);
-    renderDecks();
+  // ---- ready-made mig sets ---------------------------------------------------
+  // The curated vocabulary from the ios app (mig-sets.js), grouped by level.
+  // Reviewed in place, read-only: they are not copied into the editable decks.
+  var LEVELS = [['a1', 'a1 · начало'], ['a2', 'a2 · дальше'], ['b1', 'b1 · увереннее']];
+
+  function renderMigSets() {
+    var host = $('migSets');
+    host.innerHTML = '';
+    var sets = window.MIG_SETS || [];
+    if (!sets.length) return;
+
+    var head = document.createElement('div');
+    head.className = 'setshead';
+    head.textContent = 'готовые наборы миг';
+    host.appendChild(head);
+
+    LEVELS.forEach(function (lv) {
+      var inLevel = sets.filter(function (s) { return s.level === lv[0]; });
+      if (!inLevel.length) return;
+      var lh = document.createElement('div');
+      lh.className = 'setslevel';
+      lh.textContent = lv[1];
+      host.appendChild(lh);
+
+      var grid = document.createElement('div');
+      grid.className = 'setgrid';
+      inLevel.forEach(function (s) {
+        var row = document.createElement('button');
+        row.type = 'button';
+        row.className = 'setrow';
+        var name = document.createElement('span');
+        name.className = 'setname';
+        name.textContent = s.name;
+        var count = document.createElement('span');
+        count.className = 'setcount';
+        count.textContent = s.cards.length;
+        row.appendChild(name);
+        row.appendChild(count);
+        row.addEventListener('click', function () { startReview({ name: s.name, cards: s.cards }); });
+        grid.appendChild(row);
+      });
+      host.appendChild(grid);
+    });
   }
 
   // ---- review ----------------------------------------------------------------
@@ -240,7 +276,6 @@
   function init() {
     $('newDeck').addEventListener('click', function () { openEditor(null); });
     $('importDeck').addEventListener('click', function () { show('v-import', 'вставить список'); });
-    $('starterDeck').addEventListener('click', starterDeck);
 
     $('addRow').addEventListener('click', function () { addRow(); });
     $('saveDeck').addEventListener('click', saveDeck);
@@ -270,6 +305,7 @@
       else if (e.key === 'ArrowLeft') step(-1);
     });
 
+    renderMigSets();
     renderDecks();
   }
 

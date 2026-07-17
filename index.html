@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>mig · learn russian</title>
 <meta name="description" content="mig is a russian learning app: speed reading, vocabulary practice, grammar, and повторяй, a pronunciation trainer you can play in the browser.">
+<script>(function(){try{var t=localStorage.getItem('mig-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,19 +23,6 @@
     <p>mig (миг, russian for "an instant") is a russian learning app built around short, focused practice. read at speed, match pairs, rebuild a word from scrambled letters, drill noun cases, put a sentence in order, fill the gap. a few minutes at a time, on your device.</p>
     <p>a growing library of curated vocabulary across a1, a2, and b1 levels: family, food, transport, weather, emotions, technology, abstract concepts, and more. grammar practice is organized the same way, by level, so you build from where you are.</p>
     <a class="cta" href="https://apps.apple.com/us/app/mig-russian-speed-reader/id6774667702">download on the app store</a>
-  </section>
-
-  <section>
-    <h2>on the web</h2>
-    <p class="meta">a small piece of mig you can try right now, no install.</p>
-    <a class="tool" href="repeat/">
-      <div class="tool-name">повторяй <span class="lat">repeat after me</span></div>
-      <div class="tool-desc">hear a russian word or sentence, say it back, and get your pronunciation scored. words and phrases, in the browser.</div>
-    </a>
-    <a class="tool" href="cards/">
-      <div class="tool-name">карточки <span class="lat">flashcards</span></div>
-      <div class="tool-desc">make or import a deck of vocabulary and review it. tap to flip, tap the speaker to hear the word.</div>
-    </a>
   </section>
 
   <section>
@@ -92,6 +80,19 @@
     </div>
   </section>
 
+  <section class="onweb">
+    <h2>on the web</h2>
+    <p class="meta">a small piece of mig you can try right now, in the browser, no install.</p>
+    <a class="tool" href="repeat/">
+      <div class="tool-name">повторяй <span class="lat">repeat after me</span></div>
+      <div class="tool-desc">hear a russian word or sentence, say it back, and get your pronunciation scored. words and phrases, in the browser.</div>
+    </a>
+    <a class="tool" href="cards/">
+      <div class="tool-name">карточки <span class="lat">flashcards</span></div>
+      <div class="tool-desc">review a ready-made mig set, or make and import your own deck. tap to flip, tap the speaker to hear the word.</div>
+    </a>
+  </section>
+
   <section>
     <h2>about</h2>
     <p>mig is built by <a href="https://github.com/ddyson1">devin dyson</a>, a graduate student at boston university who started learning russian and wanted a tool that didn't exist. it's free, ad-free, and tracks nothing.</p>
@@ -106,5 +107,6 @@
     <a href="https://github.com/mig-app">github</a>
   </footer>
 </main>
+<script src="theme.js"></script>
 </body>
 </html>
