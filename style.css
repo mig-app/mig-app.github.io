@@ -330,18 +330,28 @@ footer a:hover {
 .tool-name .lat { font-size: 13px; color: var(--muted); font-weight: 400; margin-left: 8px; }
 .tool-desc { font-size: 14px; color: var(--muted); margin-top: 4px; }
 
-/* theme toggle: a small corner button, present on every page (injected by theme.js) */
-.themetoggle {
-  position: fixed; bottom: 20px; right: 20px; z-index: 50;
-  width: 40px; height: 40px; border-radius: 50%;
-  display: grid; place-items: center;
-  background: var(--card); border: 1px solid var(--hairline);
-  color: var(--muted); cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
+/* "on the web": set the web tools apart from the app pitch with a top rule */
+.onweb {
+  border-top: 1px solid var(--hairline);
+  margin-top: 48px;
+  padding-top: 32px;
 }
-.themetoggle:hover { color: var(--text); border-color: var(--oxblood); }
-.themetoggle svg { width: 18px; height: 18px; }
-@media (max-width: 480px) { .themetoggle { bottom: 14px; right: 14px; } }
+.onweb h2 { margin-top: 0; }
+
+/* theme toggle: a small corner button, present on every page (injected by theme.js).
+   uses the lighter panel fill plus a soft shadow so it floats and is easy to find. */
+.themetoggle {
+  position: fixed; bottom: 22px; right: 22px; z-index: 50;
+  width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--mig-panel); border: 1px solid var(--hairline);
+  color: var(--text); cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.themetoggle:hover { color: var(--oxblood); border-color: var(--oxblood); transform: translateY(-1px); }
+.themetoggle svg { width: 19px; height: 19px; }
+@media (max-width: 480px) { .themetoggle { bottom: 16px; right: 16px; } }
 
 /* ready-made vocabulary sets, shared by карточки and повторяй */
 .setshead { margin: 34px 0 2px; font-size: 13px; color: var(--muted); letter-spacing: 0.06em; }
