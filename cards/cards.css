@@ -21,7 +21,7 @@
   color: var(--oxblood); font-family: inherit; font-size: 14px; font-weight: 500;
   padding: 9px 16px; cursor: pointer; transition: background 0.15s ease, color 0.15s ease;
 }
-.btn:hover { background: var(--oxblood); color: var(--mig-near-white); }
+.btn:hover { background: var(--oxblood); color: var(--on-accent); }
 .btn.ghost { border-color: var(--hairline); color: var(--muted); }
 .btn.ghost:hover { background: none; border-color: var(--oxblood); color: var(--text); }
 .btn.danger { border-color: var(--hairline); color: var(--muted); margin-left: auto; }

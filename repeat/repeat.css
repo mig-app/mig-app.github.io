@@ -73,7 +73,7 @@
 }
 .mic:active { transform: scale(0.96); }
 .mic svg { width: 30px; height: 30px; }
-.mic.listening { background: var(--oxblood); color: var(--mig-near-white); }
+.mic.listening { background: var(--oxblood); color: var(--on-accent); }
 .mic.listening::before {
   content: ""; position: absolute; inset: -6px; border-radius: 50%;
   border: 2px solid var(--oxblood); animation: mic-pulse 1.2s ease-out infinite;
