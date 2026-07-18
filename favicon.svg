@@ -1,9 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="mig">
   <title>mig</title>
-  <!-- notebook-dark tile, the near-white М from the МИГ lockup, the oxblood rule -->
+  <!-- the МИГ wordmark, matching the app icon: notebook-dark tile, heavy
+       near-white МИГ with the oxblood stress dash above the И, MiG beneath -->
   <rect width="64" height="64" rx="14" fill="#14130f"/>
-  <path d="M16 44 V18 L32 35 L48 18 V44"
-        fill="none" stroke="#f5f3ec" stroke-width="7"
-        stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="23" y="51" width="18" height="3" rx="1.5" fill="#bf382b"/>
+  <rect x="27.5" y="13.5" width="9" height="2.6" rx="1.3" fill="#bf382b"/>
+  <text x="32" y="41.5" text-anchor="middle"
+        font-family="-apple-system, system-ui, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="800" font-size="25" letter-spacing="0.5"
+        fill="#f5f3ec">МИГ</text>
+  <text x="32" y="52.5" text-anchor="middle"
+        font-family="-apple-system, system-ui, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="600" font-size="9.5" fill="#a8a69d">MiG</text>
 </svg>
