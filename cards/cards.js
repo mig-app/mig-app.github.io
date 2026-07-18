@@ -7,6 +7,19 @@
   var KEY = 'mig.cards.v1';
   var $ = function (id) { return document.getElementById(id); };
 
+  // russian chrome stays primary; a quiet latin gloss rides along (.lat inline,
+  // .lat-under as a second line). styles live in the shared style.css.
+  function withGloss(el, ru, en, under) {
+    el.textContent = ru;
+    if (!en) return el;
+    var g = document.createElement('span');
+    g.className = under ? 'lat-under' : 'lat';
+    g.textContent = en;
+    if (!under) el.appendChild(document.createTextNode(' '));
+    el.appendChild(g);
+    return el;
+  }
+
   // ---- storage ---------------------------------------------------------------
   function loadDecks() {
     try {
@@ -71,9 +84,9 @@
   var flipped = false;
 
   var views = ['v-decks', 'v-edit', 'v-import', 'v-review'];
-  function show(view, crumb) {
+  function show(view, crumb, crumbEn) {
     views.forEach(function (v) { $(v).hidden = v !== view; });
-    $('crumb').textContent = crumb || '';
+    withGloss($('crumb'), crumb || '', crumbEn);
     $('lede').hidden = view !== 'v-decks';
   }
 
@@ -84,7 +97,7 @@
     if (!decks.length) {
       var p = document.createElement('div');
       p.className = 'empty';
-      p.textContent = 'пока пусто. сделай колоду или вставь готовый список.';
+      withGloss(p, 'пока пусто. сделай колоду или вставь готовый список.', 'nothing here yet. make a deck or paste a ready-made list.', true);
       list.appendChild(p);
     }
     decks.forEach(function (d) {
@@ -98,13 +111,14 @@
       name.textContent = d.name;
       var meta = document.createElement('div');
       meta.className = 'deck-meta';
-      meta.textContent = d.cards.length + (d.cards.length === 1 ? ' карточка' : ' карточек');
+      var n = d.cards.length;
+      withGloss(meta, n + (n === 1 ? ' карточка' : ' карточек'), n === 1 ? 'card' : 'cards');
       left.appendChild(name); left.appendChild(meta);
 
       var edit = document.createElement('button');
       edit.className = 'deck-edit';
       edit.type = 'button';
-      edit.textContent = 'править';
+      withGloss(edit, 'править', 'edit');
       edit.addEventListener('click', function (e) { e.stopPropagation(); openEditor(d); });
 
       row.appendChild(left); row.appendChild(edit);
@@ -118,12 +132,12 @@
     var wrap = document.createElement('div');
     wrap.className = 'row2';
     var a = document.createElement('input');
-    a.type = 'text'; a.placeholder = 'по-русски'; a.value = ru || ''; a.autocomplete = 'off';
+    a.type = 'text'; a.placeholder = 'по-русски · russian'; a.value = ru || ''; a.autocomplete = 'off';
     var b = document.createElement('input');
-    b.type = 'text'; b.placeholder = 'перевод'; b.value = en || ''; b.autocomplete = 'off';
+    b.type = 'text'; b.placeholder = 'перевод · translation'; b.value = en || ''; b.autocomplete = 'off';
     var del = document.createElement('button');
     del.className = 'row-del'; del.type = 'button'; del.textContent = '×';
-    del.setAttribute('aria-label', 'убрать строку');
+    del.setAttribute('aria-label', 'убрать строку · remove row');
     del.addEventListener('click', function () { wrap.remove(); });
     wrap.appendChild(a); wrap.appendChild(b); wrap.appendChild(del);
     $('rows').appendChild(wrap);
@@ -136,7 +150,7 @@
     if (d && d.cards.length) d.cards.forEach(function (c) { addRow(c.ru, c.en); });
     else { addRow(); addRow(); addRow(); }
     $('deleteDeck').hidden = !d;
-    show('v-edit', d ? 'правка' : 'новая колода');
+    show('v-edit', d ? 'правка' : 'новая колода', d ? 'edit' : 'new deck');
   }
 
   function collectRows() {
@@ -152,7 +166,7 @@
   function saveDeck() {
     var cards = collectRows();
     var name = $('deckName').value.trim() || 'без названия';
-    if (!cards.length) { $('crumb').textContent = 'нужна хотя бы одна пара'; return; }
+    if (!cards.length) { withGloss($('crumb'), 'нужна хотя бы одна пара', 'at least one pair'); return; }
     if (editingId) {
       decks.forEach(function (d) { if (d.id === editingId) { d.name = name; d.cards = cards; } });
     } else {
@@ -172,12 +186,13 @@
   // ---- import ----------------------------------------------------------------
   function refreshCount() {
     var n = parseImport($('importText').value).length;
-    $('pcount').textContent = n ? (n + (n === 1 ? ' пара найдена' : ' пар найдено')) : '';
+    if (!n) { $('pcount').textContent = ''; return; }
+    withGloss($('pcount'), n + (n === 1 ? ' пара найдена' : ' пар найдено'), n === 1 ? 'pair found' : 'pairs found');
   }
 
   function doImport() {
     var cards = parseImport($('importText').value);
-    if (!cards.length) { $('pcount').textContent = 'ничего не разобрал. одна пара на строку.'; return; }
+    if (!cards.length) { withGloss($('pcount'), 'ничего не разобрал. одна пара на строку.', 'could not parse that. one pair per line.', true); return; }
     decks.push({ id: newId(), name: 'вставленная колода', cards: cards });
     saveDecks(decks);
     $('importText').value = '';
@@ -188,7 +203,7 @@
   // ---- ready-made mig sets ---------------------------------------------------
   // The curated vocabulary from the ios app (mig-sets.js), grouped by level.
   // Reviewed in place, read-only: they are not copied into the editable decks.
-  var LEVELS = [['a1', 'a1 · начало'], ['a2', 'a2 · дальше'], ['b1', 'b1 · увереннее']];
+  var LEVELS = [['a1', 'a1 · начало · start'], ['a2', 'a2 · дальше · further'], ['b1', 'b1 · увереннее · more confident']];
 
   function renderMigSets() {
     var host = $('migSets');
@@ -198,7 +213,7 @@
 
     var head = document.createElement('div');
     head.className = 'setshead';
-    head.textContent = 'готовые наборы миг';
+    withGloss(head, 'готовые наборы миг', 'ready-made mig sets');
     host.appendChild(head);
 
     LEVELS.forEach(function (lv) {
@@ -248,13 +263,14 @@
     $('front').textContent = c.ru;
     $('back').textContent = c.en;
     $('pos').textContent = (at + 1) + ' / ' + order.length;
-    $('flipHint').textContent = 'нажми на карточку, чтобы перевернуть';
+    withGloss($('flipHint'), 'нажми на карточку, чтобы перевернуть', 'tap the card to flip', true);
   }
 
   function flip() {
     flipped = !flipped;
     $('card').classList.toggle('flipped', flipped);
-    $('flipHint').textContent = flipped ? 'перевод' : 'нажми на карточку, чтобы перевернуть';
+    if (flipped) withGloss($('flipHint'), 'перевод', 'the translation', true);
+    else withGloss($('flipHint'), 'нажми на карточку, чтобы перевернуть', 'tap the card to flip', true);
   }
 
   function step(n) {
@@ -275,7 +291,7 @@
   // ---- wiring ----------------------------------------------------------------
   function init() {
     $('newDeck').addEventListener('click', function () { openEditor(null); });
-    $('importDeck').addEventListener('click', function () { show('v-import', 'вставить список'); });
+    $('importDeck').addEventListener('click', function () { show('v-import', 'вставить список', 'paste a list'); });
 
     $('addRow').addEventListener('click', function () { addRow(); });
     $('saveDeck').addEventListener('click', saveDeck);
