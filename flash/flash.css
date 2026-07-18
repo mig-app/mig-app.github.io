@@ -1,0 +1,101 @@
+/* «flash» — the speed reader, on the web. Uses the site's shared tokens
+   (style.css) and the shared set-picker styles; the small header/crumb chrome
+   mirrors repeat.css so the tool pages stay siblings. */
+
+.rhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 34px;
+}
+.rhead .logo .cyrillic { font-size: 24px; }
+.rhead .logo .latin { font-size: 12px; }
+
+.rlede { color: var(--muted); font-size: 16px; margin-top: 18px; }
+
+.practicetop {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin: 24px 0 10px;
+}
+.crumb {
+  background: none; border: none; cursor: pointer;
+  font-family: inherit; font-size: 13px; color: var(--muted); padding: 4px 0;
+  transition: color 0.15s ease;
+}
+.crumb:hover { color: var(--text); }
+.pos { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* thin progress track, the same idea as the app's ProgressTrack */
+.ftrack {
+  height: 3px; border-radius: 2px; background: var(--mig-panel);
+  overflow: hidden; margin-bottom: 8px;
+}
+.ftrack-fill {
+  height: 100%; width: 0; border-radius: 2px; background: var(--oxblood);
+  transition: width 0.2s ease;
+}
+
+/* the reading stage: one word, huge, click to pause */
+.stage {
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  min-height: 280px;
+  padding: 36px 24px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; text-align: center; cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.stage:hover { border-color: var(--oxblood); }
+.stage.paused { border-color: var(--oxblood); }
+.fword {
+  font-size: clamp(40px, 9vw, 58px);
+  font-weight: 650; letter-spacing: -0.01em; color: var(--text);
+  line-height: 1.1; overflow-wrap: anywhere;
+}
+.ftranslit { font-size: 15px; color: var(--muted); min-height: 1.4em; }
+.freveal { font-size: 20px; color: var(--mig-gloss); min-height: 1.5em; }
+.freveal.dimmed { visibility: hidden; }
+.fhint { margin-top: 14px; font-size: 12px; color: var(--muted); }
+.stage.running .fhint { opacity: 0.65; }
+
+/* controls: speed slider + mode segment */
+.controls { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+.ctl { display: flex; align-items: center; gap: 12px; }
+.clabel { flex: none; width: 92px; font-size: 12px; color: var(--muted); }
+.cvalue { flex: none; min-width: 84px; font-size: 13px; color: var(--text);
+  font-variant-numeric: tabular-nums; text-align: right; }
+input[type="range"] {
+  flex: 1; accent-color: var(--oxblood); height: 24px; background: transparent;
+}
+.seg { display: flex; flex: 1; background: var(--card); border: 1px solid var(--hairline);
+  border-radius: 10px; overflow: hidden; }
+.segbtn {
+  flex: 1; background: none; border: none; cursor: pointer; font-family: inherit;
+  font-size: 13px; color: var(--muted); padding: 8px 6px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.segbtn.on { background: var(--mig-oxblood-wash); color: var(--text); }
+
+/* end of set */
+.endcard {
+  margin-top: 22px; padding: 20px;
+  background: var(--card); border: 1px solid var(--hairline); border-radius: 14px;
+  text-align: center;
+}
+.endtitle { font-size: 16px; font-weight: 600; margin-bottom: 14px; }
+.btnrow { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.fbtn {
+  background: none; border: 1px solid var(--hairline); border-radius: 999px;
+  cursor: pointer; font-family: inherit; font-size: 14px; color: var(--text);
+  padding: 9px 18px; transition: border-color 0.15s ease, background 0.15s ease;
+}
+.fbtn:hover { border-color: var(--oxblood); }
+.fbtn.primary { background: var(--oxblood); border-color: var(--oxblood); color: var(--on-accent); }
+.fbtn .lat { color: inherit; opacity: 0.7; }
+
+@media (max-width: 480px) {
+  .stage { min-height: 220px; }
+  .clabel { width: 74px; }
+}
