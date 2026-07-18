@@ -22,9 +22,9 @@
     <div class="score" id="score"></div>
   </header>
 
-  <h1>повторяй</h1>
+  <h1>повторяй <span class="lat">repeat after me</span></h1>
   <div class="rule"></div>
-  <p class="rlede" id="lede">послушай и повтори вслух. я оценю произношение.</p>
+  <p class="rlede" id="lede">послушай и повтори вслух. я оценю произношение. <span class="lat-under">listen and repeat aloud. i'll score your pronunciation.</span></p>
 
   <!-- picker: warm-up sets + the ready-made mig vocabulary -->
   <section id="v-pick">
@@ -34,7 +34,7 @@
   <!-- practice: one word at a time, walk with назад / дальше -->
   <section id="v-practice" hidden>
     <div class="practicetop">
-      <button class="crumb" id="back" type="button">к наборам</button>
+      <button class="crumb" id="back" type="button">к наборам <span class="lat">sets</span></button>
       <div class="pos" id="pos"></div>
     </div>
 
@@ -44,30 +44,30 @@
       <div class="translit" id="translit"></div>
       <button class="listen" id="listen" type="button">
         <svg viewBox="0 0 16 16" fill="none" aria-hidden><path d="M2 6v4M5 3.5v9M8 5v6M11 4v8M14 6.5v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        прослушать
+        прослушать <span class="lat">listen</span>
       </button>
     </div>
 
     <div class="mic-wrap">
-      <button class="mic" id="mic" type="button" aria-label="говорить">
+      <button class="mic" id="mic" type="button" aria-label="говорить · speak">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden>
           <rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/>
           <path d="M6 11a6 6 0 0 0 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           <path d="M12 17v3M9 20h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </button>
-      <div class="status" id="status">нажми и повтори</div>
+      <div class="status" id="status">нажми и повтори<span class="lat-under">tap and repeat</span></div>
     </div>
 
     <div class="result" id="result" hidden></div>
 
     <div class="navrow">
-      <button class="nav" id="prev" type="button" aria-label="предыдущее слово">
+      <button class="nav" id="prev" type="button" aria-label="предыдущее слово · previous word">
         <svg viewBox="0 0 16 16" fill="none" aria-hidden><path d="M10 3 L5 8 L10 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        назад
+        назад <span class="lat">back</span>
       </button>
-      <button class="nav" id="next" type="button" aria-label="следующее слово">
-        дальше
+      <button class="nav" id="next" type="button" aria-label="следующее слово · next word">
+        дальше <span class="lat">next</span>
         <svg viewBox="0 0 16 16" fill="none" aria-hidden><path d="M6 3 L11 8 L6 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
@@ -75,12 +75,13 @@
     <p id="srnote" hidden>
       оценка произношения работает лучше всего в chrome (нужен доступ к микрофону).
       в других браузерах можно слушать и повторять, но без оценки.
+      <span class="lat-under">pronunciation scoring works best in chrome (it needs the microphone). other browsers can listen and repeat, just without the score.</span>
     </p>
   </section>
 
   <footer>
     <a href="../">mig</a> ·
-    <a href="../cards/">карточки</a> ·
+    <a href="../cards/">карточки <span class="lat">flashcards</span></a> ·
     <a href="../support.html">support</a> ·
     <a href="../privacy.html">privacy</a>
   </footer>

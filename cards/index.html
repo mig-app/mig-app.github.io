@@ -22,16 +22,16 @@
     <div class="crumb" id="crumb"></div>
   </header>
 
-  <h1>карточки</h1>
+  <h1>карточки <span class="lat">flashcards</span></h1>
   <div class="rule"></div>
-  <p class="lede" id="lede">выбери готовый набор миг, сделай свою колоду или вставь список. нажми на карточку, чтобы перевернуть.</p>
+  <p class="lede" id="lede">выбери готовый набор миг, сделай свою колоду или вставь список. нажми на карточку, чтобы перевернуть. <span class="lat-under">pick a ready-made mig set, make your own deck, or paste a list. tap a card to flip it.</span></p>
 
   <!-- decks -->
   <section id="v-decks">
     <div class="decks" id="deckList"></div>
     <div class="btnrow">
-      <button class="btn" id="newDeck" type="button">новая колода</button>
-      <button class="btn" id="importDeck" type="button">вставить список</button>
+      <button class="btn" id="newDeck" type="button">новая колода <span class="lat">new deck</span></button>
+      <button class="btn" id="importDeck" type="button">вставить список <span class="lat">paste a list</span></button>
     </div>
     <div class="sets" id="migSets"></div>
   </section>
@@ -39,26 +39,26 @@
   <!-- editor -->
   <section id="v-edit" hidden>
     <label class="field">
-      <span class="flabel">название колоды</span>
-      <input id="deckName" type="text" placeholder="моя колода" autocomplete="off">
+      <span class="flabel">название колоды <span class="lat">deck name</span></span>
+      <input id="deckName" type="text" placeholder="моя колода · my deck" autocomplete="off">
     </label>
     <div class="rows" id="rows"></div>
     <div class="btnrow">
-      <button class="btn ghost" id="addRow" type="button">ещё строка</button>
-      <button class="btn" id="saveDeck" type="button">сохранить</button>
-      <button class="btn ghost" id="cancelEdit" type="button">назад</button>
-      <button class="btn danger" id="deleteDeck" type="button" hidden>удалить</button>
+      <button class="btn ghost" id="addRow" type="button">ещё строка <span class="lat">another row</span></button>
+      <button class="btn" id="saveDeck" type="button">сохранить <span class="lat">save</span></button>
+      <button class="btn ghost" id="cancelEdit" type="button">назад <span class="lat">back</span></button>
+      <button class="btn danger" id="deleteDeck" type="button" hidden>удалить <span class="lat">delete</span></button>
     </div>
   </section>
 
   <!-- import -->
   <section id="v-import" hidden>
-    <p class="hint">одна пара на строку: русское слово, потом перевод. разделяй табом, запятой или дефисом.</p>
+    <p class="hint">одна пара на строку: русское слово, потом перевод. разделяй табом, запятой или дефисом. <span class="lat-under">one pair per line: the russian word, then the translation. separate with a tab, comma, or dash.</span></p>
     <textarea id="importText" rows="10" spellcheck="false" placeholder="привет, hi&#10;вода, water&#10;спасибо, thank you"></textarea>
     <div class="pcount" id="pcount"></div>
     <div class="btnrow">
-      <button class="btn" id="doImport" type="button">создать колоду</button>
-      <button class="btn ghost" id="cancelImport" type="button">назад</button>
+      <button class="btn" id="doImport" type="button">создать колоду <span class="lat">create deck</span></button>
+      <button class="btn ghost" id="cancelImport" type="button">назад <span class="lat">back</span></button>
     </div>
   </section>
 
@@ -67,15 +67,15 @@
     <div class="revbar">
       <span class="pos" id="pos"></span>
       <div class="revacts">
-        <button class="chip" id="shuffle" type="button">перемешать</button>
-        <button class="chip" id="exitReview" type="button">к колодам</button>
+        <button class="chip" id="shuffle" type="button">перемешать <span class="lat">shuffle</span></button>
+        <button class="chip" id="exitReview" type="button">к колодам <span class="lat">decks</span></button>
       </div>
     </div>
 
-    <div class="card" id="card" tabindex="0" role="button" aria-label="карточка, нажми чтобы перевернуть">
+    <div class="card" id="card" tabindex="0" role="button" aria-label="карточка, нажми чтобы перевернуть · tap the card to flip">
       <div class="card-inner" id="cardInner">
         <div class="face front">
-          <button class="speak" id="speak" type="button" aria-label="прослушать">
+          <button class="speak" id="speak" type="button" aria-label="прослушать · listen">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden>
               <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
               <path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
@@ -88,17 +88,17 @@
         </div>
       </div>
     </div>
-    <div class="flip-hint" id="flipHint">нажми на карточку, чтобы перевернуть</div>
+    <div class="flip-hint" id="flipHint">нажми на карточку, чтобы перевернуть<span class="lat-under">tap the card to flip</span></div>
 
     <div class="navrow">
-      <button class="btn ghost" id="prev" type="button">назад</button>
-      <button class="btn" id="next" type="button">дальше</button>
+      <button class="btn ghost" id="prev" type="button">назад <span class="lat">back</span></button>
+      <button class="btn" id="next" type="button">дальше <span class="lat">next</span></button>
     </div>
   </section>
 
   <footer>
     <a href="../">mig</a> ·
-    <a href="../repeat/">повторяй</a> ·
+    <a href="../repeat/">повторяй <span class="lat">repeat</span></a> ·
     <a href="../support.html">support</a> ·
     <a href="../privacy.html">privacy</a>
   </footer>

@@ -367,3 +367,14 @@ footer a:hover {
 .setname { font-size: 14px; color: var(--text); }
 .setcount { font-size: 12px; color: var(--muted); flex: none; font-variant-numeric: tabular-nums; }
 @media (max-width: 480px) { .setgrid { grid-template-columns: 1fr; } }
+
+/* bilingual chrome (повторяй + карточки): every russian ui label carries a
+   quiet latin gloss so an english speaker can always navigate. the russian
+   stays primary; the gloss is small, muted, never the accent. inline .lat
+   sits beside a label; .lat-under is the block form for a second line under
+   ledes, hints, and status text. */
+.lat { font-size: 11px; color: var(--muted); font-weight: 400; }
+.lat-under { display: block; font-size: 12px; color: var(--muted); font-weight: 400; margin-top: 3px; }
+h1 .lat { font-size: 14px; }
+/* when a filled button hovers, let the gloss follow the on-accent ink */
+.btn:hover .lat { color: inherit; opacity: 0.8; }
