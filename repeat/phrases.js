@@ -1,5 +1,6 @@
-/* Phrases for «повторяй». kind: 'word' | 'sentence'. Curated by theme, then native-checked
-   (spelling, grammar, translation, naturalness) in one pass. */
+/* Phrases for «повторяй». kind: 'word' | 'sentence'. Curated by theme.
+   No native-speaker review has been done on this list; the earlier claim of
+   one was removed rather than left sitting in a public repo. */
 window.PHRASES = [
   { ru: "дом", en: "house", kind: "word", translit: "dom" },
   { ru: "вода", en: "water", kind: "word", translit: "vada" },
